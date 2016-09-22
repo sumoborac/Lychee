@@ -191,7 +191,7 @@ class Video extends Module {
                         }
 
 			# Save to DB
-			$values	= array(LYCHEE_TABLE_PHOTOS, $id, $info['title'], $video_name, $description, $tags, $mime_type, $info['width'], $info['height'], $info['size'], '', '', '', '', '', '', '', $path_thumb, $albumID, $public, $star, $checksum, '', 'video');
+			$values	= array(LYCHEE_TABLE_PHOTOS, $id, $info['title'], $video_name, $description, $tags, $mime_type, $info['width'], $info['height'], $info['size'], '', '', '', '', '', '', 0, $path_thumb, $albumID, $public, $star, $checksum, 0, 'video');
 			$query	= Database::prepare($this->database, "INSERT INTO ? (id, title, url, description, tags, type, width, height, size, iso, aperture, make, model, shutter, focal, takestamp, thumbUrl, album, public, star, checksum, medium, media_type) VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?')", $values);
 			$result = $this->database->query($query);
 
@@ -391,6 +391,8 @@ class Video extends Module {
             $output = shell_exec( $command );
 
             $regex_sizes = "/Video: ([^,]*), ([^,]*), ([0-9]{1,4})x([0-9]{1,4})/";
+            $width = null;
+            $height = null;
             if (preg_match($regex_sizes, $output, $regs)) {
                 $codec = $regs [1] ? $regs [1] : null;
                 $width = $regs [3] ? $regs [3] : null;
