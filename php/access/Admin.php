@@ -89,7 +89,7 @@ class Admin extends Access {
 
 		Module::dependencies(isset($_POST['title']));
 		$album = new Album($this->database, $this->plugins, $this->settings, null);
-		echo $album->add($_POST['title']);
+		echo $album->add($_POST['title'], 1, 1);
 
 	}
 

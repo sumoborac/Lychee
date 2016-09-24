@@ -113,7 +113,7 @@ class Album extends Module {
 						$albums = $this->database->query($query);
 						$return = $albums->fetch_assoc();
 						$return['sysdate']	= date('d M. Y', $return['sysstamp']);
-						$return['password']	= ($return['password']=='' ? '0' : '1');
+						$return['password']	= (isset($return['password']) && $return['password'] == '' ? '0' : '1');
 						$query	= Database::prepare($this->database, "SELECT id, title, tags, public, star, album, thumbUrl, takestamp, url FROM ? WHERE album = '?' " . $this->settings['sortingPhotos'], array(LYCHEE_TABLE_PHOTOS, $this->albumIDs));
 						break;
 

@@ -179,7 +179,7 @@ class Session extends Module {
 	private function sessionExists($sessionId){
 	      $query = Database::prepare($this->database, "SELECT * FROM ? WHERE value = '?'", array(LYCHEE_TABLE_SESSIONS, $sessionId));
 	      $result = $this->database->query($query);
-	      return $result->num_rows === 1;
+	      return is_object($result) && $result->num_rows === 1;
 	}
 
 }
